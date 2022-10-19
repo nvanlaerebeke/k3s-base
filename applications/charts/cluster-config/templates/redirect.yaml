@@ -1,0 +1,11 @@
+{{- range $namespace := .Values.namespaces }}
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect
+  namespace: {{ $namespace | quote }}
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
+{{- end }}

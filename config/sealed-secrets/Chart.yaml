@@ -1,0 +1,9 @@
+apiVersion: v1
+name: sealed-secretse
+version: 0.0.1
+appVersion: 0.0.1
+description: sealed secret support for the cluster
+dependencies:
+  - name: sealed-secrets
+    version: "2.7.0"
+    repository: "https://bitnami-labs.github.io/sealed-secrets"
