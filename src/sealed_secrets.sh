@@ -43,6 +43,7 @@ function secrets_create_keys {
 }
 
 function secrets_install_app {
+    
     local CONFIG_PATH=$1
 
     helm upgrade \
