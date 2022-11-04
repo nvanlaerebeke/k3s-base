@@ -1,0 +1,4 @@
+name: secret-tls
+namespaces:
+  - argocd
+  - default

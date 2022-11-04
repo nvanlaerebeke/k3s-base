@@ -53,24 +53,25 @@ function base_setup {
     local INCLUDE="$ROOT/lib/include.sh"
     local ARGO_APP_DIR="$ROOT/applications/argocd"
     local ARGO_CHART_DIR="$ROOT/applications/charts"
-    
+
     if [ ! -f "$INCLUDE" ];
     then
         mkdir -p `dirname "$INCLUDE"`
         cat << EOF > "$INCLUDE"
+
 function configure {
     echo "No custom charts have been added yet"
 }
-EOF 
 
+EOF
     fi
 
-    if [ -d "$ARGO_APP_DIR" ];
+    if [ ! -d "$ARGO_APP_DIR" ];
     then
         mkdir -p "$ARGO_APP_DIR"
     fi
 
-    if [ -d "$ARGO_CHART_DIR" ];
+    if [ ! -d "$ARGO_CHART_DIR" ];
     then
         mkdir -p "$ARGO_CHART_DIR"
     fi

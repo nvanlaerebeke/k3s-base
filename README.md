@@ -59,6 +59,10 @@ ARGOCD_PASSWORD=
 #
 GIT_URL=`git config --get remote.origin.url`
 
+#
+# GIT ssh key to connect to the above repository
+#
+GIT_KEY=
 EOF
 ```
 
@@ -103,16 +107,48 @@ Launch the environment by running:
 ./exec start
 ```
 
+Wait a bit and once argocd has started up it will be reachable on the configured URL and password, the default user is `admin`.
+
 ## Usage
 
 Build in commands are:
 
-- start: starts the k3s cluster
+- start: starts/installs the k3s cluster
 - stop: stops the k3s cluster
-- uninstall: removes k3s
+- uninstall: removes k3s entirely
 - base_config: installs the base configuration
 - seal: creates the sealed secret
 
 ## Adding your own charts
 
-When adding your own charts
+To start there are several examples available in the examples folder.  
+
+Create the application yaml in `applications/argocd/<app>.yaml` and add the cart in `applications/charts/<app>`.  
+
+## Working with sealed secrets
+
+Secrets should never be put on a git repository, for this reason they're encrypted and can only be decrypted by the cluster itself.  
+To do this sealed-secrets is installed by default and a key is generated.  
+
+The keys are located in config/sealed+secrets, make sure to backup these keys when using secrets.  
+
+To create a `SealedSecret`, first create the secret that needs to be encrypted, example:
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: digitalocean-dns
+  namespace: cert-manager
+data:
+  # insert your DO access token here
+  access-token: "base64 encoded access-token here"
+```
+
+Make sure to fill in the namespace, this is important!
+
+Now get the encrypted version by running:
+
+```console
+./exec seal /tmp/secret.yaml
+```

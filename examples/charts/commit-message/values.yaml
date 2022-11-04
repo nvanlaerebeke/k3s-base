@@ -1,0 +1,4 @@
+name: commit-message
+tlssecret: secret-tls
+hostname: 
+  - commit.example.com

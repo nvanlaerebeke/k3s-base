@@ -30,3 +30,10 @@ function argocd_install_repository {
 function argocd_install_application {
 	GIT_KEY=$GIT_KEY_VALUE GIT_URL=$GIT_URL envsubst < "$1" | kubectl apply -n argocd -f -
 }
+
+function argocd_install_dir {
+	local APP_DIR=$1
+	for filename in $APP_DIR/*; do
+		argocd_install_application $filename
+	done
+}

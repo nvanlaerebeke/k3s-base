@@ -1,0 +1,14 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: digitalocean-dns
+  namespace: cert-manager
+spec:
+  encryptedData:
+    access-token: "...."
+  template:
+    metadata:
+      creationTimestamp: null
+      name: digitalocean-dns
+      namespace: cert-manager

@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: secret-tls
+  namespace: default
+spec:
+  additionalOutputFormats:
+  - type: CombinedPEM
+  secretName: secret-tls
+  issuerRef:
+    name: acme-issuer-prod
+    kind: ClusterIssuer
+  dnsNames:
+    - "*.example.com"
+    - "example.com"
