@@ -73,4 +73,11 @@ EOF
     then
         mkdir -p "$ARGO_CHART_DIR"
     fi
+
+    if [ ! -f "$ROOT/.gitignore" ];
+    then
+        cat << EOF > "$INCLUDE"
+settings.env
+config
+    fi
 }
