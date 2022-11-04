@@ -4,6 +4,16 @@ Base framework to start and stop k3s environments based on argocd
 
 This is used to set up an environment based on gitops, so a git repository will be required for your environments.
 
+## Requirements
+
+- cat
+- sudo
+- tr
+- helm 
+- kubectl
+- htpasswd
+- [kubeseal](https://github.com/bitnami-labs/sealed-secrets/releases)
+
 ## Usage
 
 ### Step 1
@@ -49,20 +59,6 @@ ARGOCD_PASSWORD=
 #
 GIT_URL=`git config --get remote.origin.url`
 
-#
-# SSH key for authorization on the repository configured in GIT_URL
-#
-GIT_KEY=
-
-#
-# SSL Certificate
-CERT=
-
-#
-# SSL Private Key
-#
-PRIVATE_KEY=
-
 EOF
 ```
 
@@ -80,3 +76,17 @@ chmod +x exec
 ```
 
 The file above is just a baseline, can be extended for the project in question.
+
+### Step 3
+
+By default the following will be deployed:
+
+- argocd
+- basic cluster configuration
+- sealed-secrets
+
+Launch the environment by running:
+
+```console
+./exec start
+```

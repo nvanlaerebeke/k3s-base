@@ -40,17 +40,4 @@ function check_config {
         echo "GIT_KEY is not set"
         exit
     fi
-    
-    if [ ! -f "$CERT" ];
-    then
-        echo $CERT
-        echo "CERT not found or does not exist"
-        exit
-    fi
-
-    if [ ! -f "$PRIVATE_KEY" ];
-    then
-        echo "PRIVATE_KEY is not set or does not exist"
-        exit
-    fi
 }
