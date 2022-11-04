@@ -14,7 +14,7 @@ This is used to set up an environment based on gitops, so a git repository will 
 - htpasswd
 - [kubeseal](https://github.com/bitnami-labs/sealed-secrets/releases)
 
-## Usage
+## Setup
 
 ### Step 1
 
@@ -90,3 +90,17 @@ Launch the environment by running:
 ```console
 ./exec start
 ```
+
+## Usage
+
+Build in commands are:
+
+- start: starts the k3s cluster
+- stop: stops the k3s cluster
+- uninstall: removes k3s
+- base_config: installs the base configuration
+- seal: creates the sealed secret
+
+## Adding your own charts
+
+When adding your own charts

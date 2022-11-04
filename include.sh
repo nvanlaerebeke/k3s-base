@@ -24,16 +24,7 @@ uninstall)
 base_config)
   config ; exit;
   ;;
-sealed-secrets)
-  secrets_install ; exit;
-  ;;
-sealed-secrets-cert)
-  secrets_create_keys "$ROOT/config/sealed_secrets" ; exit;
-  ;;
 seal)
   seal $2; exit;
-  ;;
-argocd)
-  argocd_install; exit;
   ;;
 esac
