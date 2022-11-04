@@ -1,6 +1,5 @@
 function k3s_install {
     curl -sfL https://get.k3s.io | sh - 
-    k3s_add_https_redirect "default"
 }
 
 function k3s_uninstall {
@@ -52,9 +51,4 @@ function k3s_firewall {
     then
         sudo ufw allow https
     fi
-}
-
-function k3s_add_https_redirect {
-    local MIDDLEWARE_PATH="$K3S_BASE/../config/k3s/redirect.yaml"
-    NAMESPACE=$1 envsubst < "$MIDDLEWARE_PATH" | kubectl apply -n argocd -f -
 }

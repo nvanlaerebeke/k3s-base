@@ -62,6 +62,7 @@ function configure {
     echo "No custom charts have been added yet"
 }
 EOF 
+
     fi
 
     if [ -d "$ARGO_APP_DIR" ];
@@ -76,8 +77,9 @@ EOF
 
     if [ ! -f "$ROOT/.gitignore" ];
     then
-        cat << EOF > "$INCLUDE"
+        cat << EOF > "$ROOT/.gitignore"
 settings.env
 config
+EOF
     fi
 }

@@ -14,7 +14,8 @@ function argocd_install_app {
 		--install \
 		argocd \
 		argo/argo-cd \
-		-n argocd 
+		-n argocd \
+		-f "$ROOT/config/argocd.yaml"
 }
 
 function argocd_generate_password_enc {
