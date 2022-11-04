@@ -70,6 +70,18 @@ cat <<EOF > exec
 ROOT="\$(cd "$(dirname "\${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
 . \$ROOT/vendor/k3s-base/include.sh
+. \$ROOT/lib/include.sh
+
+case $1 in
+configure)
+  echo "Configure Environment"
+  configure
+  ;;
+*)
+  echo "Please provide a valid action"
+  exit 1
+  ;;
+esac
 
 EOF
 chmod +x exec
