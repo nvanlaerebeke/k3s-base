@@ -15,7 +15,6 @@ function secrets_install {
     fi
 
     secrets_create_keys $SEALED_SECRETS_PATH
-    secrets_install_app $SEALED_SECRETS_PATH
 }
 
 function secrets_create_keys {
@@ -40,17 +39,6 @@ function secrets_create_keys {
     kubectl -n "$NAMESPACE" create secret tls "$SECRETNAME" --cert="$PUBLICKEY" --key="$PRIVATEKEY"
     kubectl -n "$NAMESPACE" label secret "$SECRETNAME" sealedsecrets.bitnami.com/sealed-secrets-key=active
     kubectl -n "$NAMESPACE" delete pod -l name=sealed-secrets-controller
-}
-
-function secrets_install_app {
-    
-    local CONFIG_PATH=$1
-
-    helm upgrade \
-        --install \
-        sealed-secrets \
-        -n kube-system \
-        $K3S_BASE/../config/sealed-secrets 
 }
 
 function secrets_enc {
