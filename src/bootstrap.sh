@@ -5,7 +5,7 @@ function bootstrap {
 }
 
 function check_requirements {
-    REQUIRED=("cat" "sudo" "base64" "tr" "kubectl" "kubeseal" "htpasswd" "touch" )
+    REQUIRED=("cat" "sudo" "base64" "tr" "kubeseal" "htpasswd" "touch" )
     for t in ${REQUIRED[@]}; 
     do
         local FOUND=`whereis $t | awk '{print $2}' | tr --delete '\n'`
