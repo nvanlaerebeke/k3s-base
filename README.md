@@ -9,8 +9,6 @@ This is used to set up an environment based on gitops, so a git repository will 
 - cat
 - sudo
 - tr
-- helm 
-- kubectl
 - htpasswd
 - [kubeseal](https://github.com/bitnami-labs/sealed-secrets/releases)
 
