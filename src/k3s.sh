@@ -1,9 +1,17 @@
 function k3s_install {
     curl -sfL https://get.k3s.io | sh - 
+    if [ ! -f "/usr/local/bin/kubectl" ];
+    then
+        sudo ln -s /usr/local/bin/k3s /usr/local/bin/kubectl
+    fi
 }
 
 function k3s_uninstall {
-    /usr/local/bin/k3s-uninstall.sh
+    if [ -L "/usr/local/bin/kubectl" ];
+    then
+        unlink "/usr/local/bin/kubectl"
+    fi
+    /usr/local/bin/k3s-uninstall.sh    
 }
 
 function k3s_start {
