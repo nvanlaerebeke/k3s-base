@@ -34,6 +34,7 @@ function argocd_install_application {
 function argocd_install_dir {
 	local APP_DIR=$1
 	for filename in $APP_DIR/*; do
+		echo "Installing ${filename}"
 		argocd_install_application $filename
 	done
 }

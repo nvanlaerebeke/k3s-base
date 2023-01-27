@@ -83,4 +83,9 @@ settings.env
 config
 EOF
     fi
+
+    if [ ! -f "$ROOT/config/sealed-secrets/tls.key" ];
+    then
+        secrets_create_keys
+    fi
 }
