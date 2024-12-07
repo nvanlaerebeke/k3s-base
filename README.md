@@ -10,6 +10,7 @@ This is used to set up an environment based on gitops, so a git repository will 
 - sudo
 - tr
 - htpasswd
+- helm
 - [kubeseal](https://github.com/bitnami-labs/sealed-secrets/releases)
 
 ## Setup
