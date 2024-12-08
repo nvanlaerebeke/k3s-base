@@ -48,3 +48,14 @@ function secrets_enc {
 function secrets_seal {
     kubeseal --cert "$ROOT/config/sealed-secrets/tls.crt" --controller-name sealed-secrets -o yaml < "$1"
 }
+
+function secrets_seal_update_key {
+    local SEALED_SECRETS_PATH="$ROOT/config/sealed-secrets"
+    local PRIVATEKEY="$SEALED_SECRETS_PATH/tls.key"
+    local PUBLICKEY="$SEALED_SECRETS_PATH/tls.crt"
+    local NAMESPACE="kube-system"
+    local LABEL="sealedsecrets.bitnami.com/sealed-secrets-key=active"
+
+    kubectl get secret -n "$NAMESPACE" -l "$LABEL" -o jsonpath='{.items[0].data.tls\.key}' | base64 -d > "$PRIVATEKEY"
+    kubectl get secret -n "$NAMESPACE" -l "$LABEL" -o jsonpath='{.items[0].data.tls\.crt}' | base64 -d > "$PUBLICKEY"
+}

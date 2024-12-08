@@ -173,6 +173,33 @@ These are used to create and decrypt the sealed secrets in your cluster.
 If for some reason the cluster needs to be re-installed, or your `git` directory needs to be re-build these files are required.  
 When they're lost, all secrets need to be re-created!
 
+## Sealed Secret Private Key Rotation
+
+Sealed Secrets is deployed in the `kube-system` namespace, every x amount of time these keys are rotated.  
+When trying to create a sealed secret, it could be that you have to update your keys.  
+
+Getting the private key can be done by running:
+
+```console
+kubectl get secret -n kube-system -l sealedsecrets.bitnami.com/sealed-secrets-key=active -o jsonpath='{.items[0].data.tls\.key}' | base64 -d
+```
+
+Getting the public key can be done by running:
+
+```console
+kubectl get secret -n kube-system -l sealedsecrets.bitnami.com/sealed-secrets-key=active -o jsonpath='{.items[0].data.tls\.crt}' | base64 -d
+```
+
+Or run, to automatically replace the keys in `./config/sealed-secrets/`, run:
+
+```console
+./exec seal-update
+```
+
+Note: the kubectl command has to connect to the correct cluster for this to work.
+
 ## Gitignores
 
-A sample gitignore file is included in the root.
+A sample gitignore file is included in the root.  
+Copy the `gitignore` file to `.gitignore` in your repository root.
+ 

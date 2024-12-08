@@ -22,3 +22,7 @@ function config {
 function seal {
     secrets_seal $1
 }
+
+function seal-update {
+    secrets_seal_update_key
+}

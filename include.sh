@@ -27,4 +27,7 @@ base_config)
 seal)
   seal $2; exit;
   ;;
+seal-update)
+  seal-update; exit;
+  ;;
 esac
