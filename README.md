@@ -134,7 +134,7 @@ Once the start has been run, an `include.sh` in the `./lib/` folder will be crea
 #this will install all charts (*.yaml) in this directory
 argocd_install_dir "$ROOT/applications/argocd/<directory>/"
 #this installs a single application
-argocd_install_dir "$ROOT/applications/argocd/my-app/my-app.yaml"
+argocd_install_application "$ROOT/applications/argocd/my-app/my-app.yaml"
 ```
 
 ## Working with sealed secrets
