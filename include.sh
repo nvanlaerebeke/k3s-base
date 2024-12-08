@@ -28,6 +28,6 @@ seal)
   seal $2; exit;
   ;;
 seal-update)
-  seal-update; exit;
+  secrets_seal_update_key; exit;
   ;;
 esac
