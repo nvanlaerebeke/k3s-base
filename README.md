@@ -142,7 +142,7 @@ argocd_install_application "$ROOT/applications/argocd/my-app/my-app.yaml"
 Secrets should never be put on a git repository, for this reason they're encrypted and can only be decrypted by the cluster itself.  
 To do this sealed-secrets is installed by default and a key is generated.  
 
-The keys are located in config/sealed_secrets, make sure to backup these keys when using secrets.  
+The keys are located in config/sealed-secrets, make sure to backup these keys when using secrets.  
 
 To create a `SealedSecret`, first create the secret that needs to be encrypted, example:
 
@@ -167,7 +167,7 @@ Now get the encrypted version by running:
 
 ## Backup and Restore Sealed Secrets
 
-Once the `./exec start` has been run for the first time, make sure to backup the certificates in `./config/sealed_secrets`.  
+Once the `./exec start` has been run for the first time, make sure to backup the certificates in `./config/sealed-secrets`.  
 These are used to create and decrypt the sealed secrets in your cluster.
 
 If for some reason the cluster needs to be re-installed, or your `git` directory needs to be re-build these files are required.  
