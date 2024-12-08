@@ -1,0 +1,4 @@
+settings.env
+config
+requirements.lock
+applications/charts/**/charts/

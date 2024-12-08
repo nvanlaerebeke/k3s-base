@@ -10,8 +10,8 @@ This is used to set up an environment based on gitops, so a git repository will 
 - sudo
 - tr
 - htpasswd
-- kubectl
-- helm
+- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
+- [helm](https://helm.sh/docs/intro/install/)
 - [kubeseal](https://github.com/bitnami-labs/sealed-secrets/releases)
 
 ## Setup
@@ -60,8 +60,10 @@ ARGOCD_PASSWORD=
 GIT_URL=`git config --get remote.origin.url`
 
 #
-# GIT ssh key to connect to the above repository
+# Path to the GIT ssh key to connect to the above repository
+# Example: /home/<user>/.ssh/git.key
 #
+# This is needed for setting up argocd, this needs to be able to pull from the git repository
 GIT_KEY=
 EOF
 ```
@@ -115,6 +117,7 @@ Build in commands are:
 
 - start: starts/installs the k3s cluster
 - stop: stops the k3s cluster
+- configure: install the charts listed in the `include.sh` file (available after start has been called)
 - uninstall: removes k3s entirely
 - base_config: installs the base configuration
 - seal: creates the sealed secret
@@ -125,12 +128,21 @@ To start there are several examples available in the examples folder.
 
 Create the application yaml in `applications/argocd/<app>.yaml` and add the cart in `applications/charts/<app>`.  
 
+Once the start has been run, an `include.sh` in the `./lib/` folder will be created, to include your own charts there are two methods you can use:
+
+```bash
+#this will install all charts (*.yaml) in this directory
+argocd_install_dir "$ROOT/applications/argocd/<directory>/"
+#this installs a single application
+argocd_install_dir "$ROOT/applications/argocd/my-app/my-app.yaml"
+```
+
 ## Working with sealed secrets
 
 Secrets should never be put on a git repository, for this reason they're encrypted and can only be decrypted by the cluster itself.  
 To do this sealed-secrets is installed by default and a key is generated.  
 
-The keys are located in config/sealed+secrets, make sure to backup these keys when using secrets.  
+The keys are located in config/sealed_secrets, make sure to backup these keys when using secrets.  
 
 To create a `SealedSecret`, first create the secret that needs to be encrypted, example:
 
@@ -152,3 +164,15 @@ Now get the encrypted version by running:
 ```console
 ./exec seal /tmp/secret.yaml
 ```
+
+## Backup and Restore Sealed Secrets
+
+Once the `./exec start` has been run for the first time, make sure to backup the certificates in `./config/sealed_secrets`.  
+These are used to create and decrypt the sealed secrets in your cluster.
+
+If for some reason the cluster needs to be re-installed, or your `git` directory needs to be re-build these files are required.  
+When they're lost, all secrets need to be re-created!
+
+## Gitignores
+
+A sample gitignore file is included in the root.
