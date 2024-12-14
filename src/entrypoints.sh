@@ -15,6 +15,7 @@ function uninstall {
 }
 
 function config {
+    argocd_install
     argocd_install_application "$K3S_BASE/../applications/argocd/cluster-config.yaml"
     argocd_install_application "$K3S_BASE/../applications/argocd/sealed-secrets.yaml"
 }

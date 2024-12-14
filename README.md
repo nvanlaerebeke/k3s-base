@@ -202,4 +202,3 @@ Note: the kubectl command has to connect to the correct cluster for this to work
 
 A sample gitignore file is included in the root.  
 Copy the `gitignore` file to `.gitignore` in your repository root.
- 

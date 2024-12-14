@@ -1,10 +1,10 @@
-installCRDs: false
 dex:
   enabled: false
+global:
+  domain: $ARGOCD_HOSTNAME
 server:
   ingress:  
     enabled: true
-    hosts: [ $ARGOCD_HOSTNAME ]
     tls: 
       - secretName: secret-tls
         hosts:
