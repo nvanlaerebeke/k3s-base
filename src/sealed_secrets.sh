@@ -11,7 +11,7 @@ function secrets_install {
     helm upgrade \
 		--install \
 		sealed-secrets \
-		$K3S_BASE/applications/charts/sealed-secrets \
+		$K3S_BASE../applications/charts/sealed-secrets \
 		-n kube-system
 }
 
