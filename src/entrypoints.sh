@@ -27,3 +27,9 @@ function seal {
 function seal-update {
     secrets_seal_update_key
 }
+
+function install {
+    helm_install
+    secrets_install
+    config
+}

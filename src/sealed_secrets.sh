@@ -8,6 +8,11 @@ function secrets_install {
     fi
 
     secrets_create_keys
+    helm upgrade \
+		--install \
+		sealed-secrets \
+		$ROOT/applications/charts/sealed-secrets \
+		-n kube-system
 }
 
 function secrets_create_keys {

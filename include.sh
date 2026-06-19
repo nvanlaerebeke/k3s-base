@@ -30,4 +30,7 @@ seal)
 seal-update)
   secrets_seal_update_key; exit;
   ;;
+install)
+  install; exit;
+  ;;
 esac
